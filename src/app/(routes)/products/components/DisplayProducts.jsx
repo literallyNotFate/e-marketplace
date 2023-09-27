@@ -50,10 +50,10 @@ function DisplayProducts() {
         }
     };
 
-
+    console.log(data)
     return (
         <div className="flex gap-5 flex-col md:flex-row">
-            {data.length === 0 ? (
+            {data.products.length === 0 ? (
                 <div className="flex flex-col gap-3 m-auto opacity-0 animate-fade-up" style={{animationDelay: '0.3s', animationFillMode: "forwards"}}>
                     <h1 className="text-3xl font-bold text-center">No results found.</h1>
                     <h2 className="text-xl font-semibold">Do you want to add product? {' '} 

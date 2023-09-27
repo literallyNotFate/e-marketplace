@@ -9,9 +9,11 @@ import Logout from "./icons/logout"
 import Skeleton from "../ui/Skeleton"
 import { useFetch } from "../../../../lib/hooks/useFetch"
 import Plus from "./icons/plus"
+import useCart from "../../../../lib/hooks/useCart"
 
 function UserDropdown({session}) {
     const {data} = useFetch(`${process.env.NEXT_PUBLIC_API_URL}/users/${session?.user.id}`, false, session?.user.id)
+    const cart = useCart()
 
     if(!data) {
         return (
@@ -19,6 +21,11 @@ function UserDropdown({session}) {
                 <Skeleton className='rounded-full w-[40px] h-[40px]'/>
             </div>
         )
+    }
+
+    const logout = () => {
+        cart.clearCart()
+        signOut()
     }
     
     return (
@@ -49,7 +56,7 @@ function UserDropdown({session}) {
                         </div>
                         <div>
                             <Button className='animate-fade-up w-[10em] group flex items-center justify-center space-x-2 mx-auto border border-red-500 bg-red-500 hover:text-red-500 text-white hover:bg-white' delay='0.8s'
-                                onClick={() => signOut()}>
+                                onClick={() => logout()}>
                                 <Logout/>
                                 <p>Logout</p>
                             </Button>
